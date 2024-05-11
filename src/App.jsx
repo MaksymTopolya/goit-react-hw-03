@@ -19,21 +19,19 @@ function App() {
 const formValues = (newUser) => {
   setUsers((prevUsers) => {
     const lastUserId = prevUsers.length > 0 ? prevUsers[prevUsers.length - 1].id : 'id-1';
-
-    const newId = lastUserId.split("-").map((elem, index) => {
-      return index === 1 ? Number(elem) + 1 : elem;
-    }).join("-");
+    const [prefix, num] = lastUserId.split("-");
+    const newId = `${prefix}-${Number(num) + 1}`;
 
     return [
       ...prevUsers,
       {
         id: newId,
-        name: newUser.username,
-        number: newUser.phone
+        ...newUser
       }
     ];
   });
 };
+
   
   const deleteUser = (userId) => {
     setUsers(prevUsers => prevUsers.filter(user => user.id !== userId));
@@ -48,7 +46,7 @@ const formValues = (newUser) => {
       <h1>Phonebook</h1>
       <ContactForm onAddNewUser={formValues} />
       <SearchBox users={users} valueInField={onSearchBoxValue} />
-      <ContactList allUsers={users} searchBoxValue={searchBoxValue} onDeleteUser={deleteUser} />
+      <ContactList allUsers={users} searchBoxValue={searchBoxValue} onDeleteUser={deleteUser  } />
     </div>
   )
 }

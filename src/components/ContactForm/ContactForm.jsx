@@ -12,11 +12,11 @@ export default function ContactForm({ onAddNewUser }) {
     }
 
     const UserSchema = Yup.object().shape({
-  username: Yup.string()
+  name: Yup.string()
             .min(3, "Too short")
             .max(15, "Too long")    
     .required("Required"),
-  phone: Yup.string()
+  number: Yup.string()
       .matches(/^[0-9-]+$/, "Only numbers")
       .min(7, "Too short")
       .max(14, "Too long")
@@ -26,22 +26,22 @@ export default function ContactForm({ onAddNewUser }) {
   
     return (
         <Formik initialValues={{
-            username: "",
-            phone: "",
+            name: "",
+            number: "",
         }}
             validationSchema={UserSchema}
             onSubmit={handleSubmit}> 
             <Form className={css.form}>
                 <div className={css.fieldContainer}>
-                    <label htmlFor={`${fieldId}-username`}>Name</label>
-                    <Field type="text" name="username" id={`${fieldId}-username`} className={css.field}></Field>
-                      <ErrorMessage className={css.error} name="username" component="span"/>
+                    <label htmlFor={`${fieldId}-name`}>Name</label>
+                    <Field type="text" name="name" id={`${fieldId}-name`} className={css.field}></Field>
+                      <ErrorMessage className={css.error} name="name" component="span"/>
                 </div>
 
                  <div className={css.fieldContainer}>
                     <label htmlFor={`${fieldId}-number`}>Number</label>
-                    <Field type="phone" name="phone" id={`${fieldId}-number`} className={css.field}></Field>
-                    <ErrorMessage className={css.error} name="phone" component="span"/>
+                    <Field type="phone" name="number" id={`${fieldId}-number`} className={css.field}></Field>
+                    <ErrorMessage className={css.error} name="number" component="span"/>
                 </div>
 
                 <button type="submit" className={css.btn}>Add contact</button>
