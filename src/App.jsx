@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { nanoid } from 'nanoid'
 import css from "./App.module.css"
 import ContactForm from './components/ContactForm/ContactForm'
 import SearchBox from './components/SearchBox/SearchBox'
@@ -18,35 +19,38 @@ function App() {
 
 const formValues = (newUser) => {
   setUsers((prevUsers) => {
-    const lastUserId = prevUsers.length > 0 ? prevUsers[prevUsers.length - 1].id : 'id-1';
-    const [prefix, num] = lastUserId.split("-");
-    const newId = `${prefix}-${Number(num) + 1}`;
-
     return [
       ...prevUsers,
       {
-        id: newId,
+        id: nanoid(),
         ...newUser
       }
     ];
   });
 };
-
   
+
   const deleteUser = (userId) => {
     setUsers(prevUsers => prevUsers.filter(user => user.id !== userId));
   }
   
-  const onSearchBoxValue = (value) => {
-    setSearchBoxValue(value)
-  }
-  
+  // const onSearchBoxValue = (value) => {
+  //   setSearchBoxValue(value)
+  // }
+
+
+  const filteredUsers = () => {
+    return users.filter(user =>
+      user.name.toLowerCase().includes(searchBoxValue.toLowerCase())
+    );
+  };
+
   return (
     <div className={css.container}>
       <h1>Phonebook</h1>
       <ContactForm onAddNewUser={formValues} />
-      <SearchBox users={users} valueInField={onSearchBoxValue} />
-      <ContactList allUsers={users} searchBoxValue={searchBoxValue} onDeleteUser={deleteUser  } />
+      <SearchBox onFilter={setSearchBoxValue} value={searchBoxValue} />
+      <ContactList allUsers={filteredUsers} onDeleteUser={deleteUser} />
     </div>
   )
 }
