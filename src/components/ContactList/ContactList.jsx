@@ -1,13 +1,13 @@
 
-import Contacts from "../Contacts/Contacts"; // Ensure this path is correct
+import Contact from "../Contact/Contact"; // Ensure this path is correct
 import css from "./ContactList.module.css";
 
-export default function ContactList({ allUsers, onDeleteUser }) {
+export default function ContactList({ contacts, onDeleteContact }) {
     return (
             <ul className={css.list}>
-                {allUsers().map((user) => (
+                {contacts().map((user) => (
                     <li key={user.id} className={css.item}>
-                        <Contacts data={user} onDeleteUser={onDeleteUser} />
+                        <Contact data={user} onDeleteUser={onDeleteContact} />
                     </li>
                     
                 ))}

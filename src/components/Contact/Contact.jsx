@@ -1,5 +1,5 @@
 import { HiMiniUserCircle, HiMiniPhone } from "react-icons/hi2";
-export default function Contacts({ data, onDeleteUser }) {
+export default function Contact({ data, onDeleteUser }) {
     return (
         <>
             <h3><HiMiniUserCircle /> {data.name}</h3>

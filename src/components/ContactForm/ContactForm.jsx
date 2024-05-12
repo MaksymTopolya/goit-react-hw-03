@@ -3,12 +3,12 @@ import { useId } from "react";
 import css from "./ContactForm.module.css"
 import * as Yup from "yup";
 
-export default function ContactForm({ onAddNewUser }) {
+export default function ContactForm({ onAddNewContact }) {
   const fieldId = useId()
 
     const handleSubmit = (value, action) => {
         action.resetForm();
-        onAddNewUser(value);
+        onAddNewContact(value);
     }
 
     const UserSchema = Yup.object().shape({
